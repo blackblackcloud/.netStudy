@@ -1,4 +1,4 @@
-using DemoApi.Infrastructure.Entities;
+using DemoApi.domin.entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DemoApi.Infrastructure;
