@@ -1,11 +1,16 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration.UserSecrets;
+
 namespace DemoApi.domin.entities;
 
 public class Student
 {
     public int Id { get; init; }
-
     public string Name { get; private set; } = null!; 
     public int? TeacherId { get; private set; }
+    private string? _passWordHash; // 成员变量没有对应属性，但是要求EF Core映射到数据库中
+    private string? _remark; //只读，从数据库里取值，不能修改
+
     public Teacher? Teacher { get;  private set; }
     public Student()
     {
@@ -20,7 +25,12 @@ public class Student
         SetName(name);
     }
    
-
+    //get
+    public string GetRemark()
+    {
+        return _remark ?? string.Empty;
+    }
+    
     public void AssignTeacher(int teacherId)
     {
         if (teacherId <= 0)
@@ -45,5 +55,13 @@ public class Student
 
         Name = name.Trim();
     }
-
+    public void ChangePassword(string newValue)
+    {
+        if (newValue.Length < 6)
+        {
+            throw new ArgumentException("密码太短");
+        }
+        var hasher = new PasswordHasher<string>();
+        _passWordHash =hasher.HashPassword(null,newValue);
+    }
 }
