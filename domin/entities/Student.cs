@@ -8,11 +8,18 @@ public class Student
     public int Id { get; init; }
     public string Name { get; private set; } = null!; 
     public int? TeacherId { get; private set; }
-    private string? _passWordHash; // 成员变量没有对应属性，但是要求EF Core映射到数据库中
-    private string? _remark; //只读，从数据库里取值，不能修改
 
-    public Teacher? Teacher { get;  private set; }
-    public Student()
+    private string? _passWordHash; // 成员变量没有对应属性，但是要求EF Core映射到数据库中
+    private string? _remark; //只读，从数据库里取值，不能修改  efcore会通过反射设置这个字段的值
+    //
+    public string? Remark
+    {
+        get => _remark;
+    }
+
+    public Teacher? Teacher { get;   set; }//仅运行时使用
+    public string? Tag { get; set; } = string.Empty; 
+    private Student()
     {
 
     }
