@@ -11,12 +11,18 @@ public class StudentConfiguration : IEntityTypeConfiguration<Student>
         builder.ToTable("Students");
 
         builder.HasKey(s => s.Id);
+
         builder.HasIndex(s => s.TeacherId);
+
         builder.Property(s => s.Name)
             .IsRequired()
             .HasMaxLength(40);
+
         builder.Property("_passWordHash");
-        builder.Property(s => s.Remark).HasField("_remark");//只读，从数据库里取值，不能修改
+
+        builder.Property(s => s.Remark)
+            .HasField("_remark");//只读，从数据库里取值，不能修改
+
         builder.Ignore(s=>s.Tag); //不映射到数据库中
 
         builder.HasOne(s => s.Teacher)

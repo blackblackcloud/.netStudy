@@ -1,3 +1,4 @@
+using DemoApi.Application.Services.Regions;
 using DemoApi.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<RetreatService>();
 builder.Services.AddTransient<AdvanceService>();
+builder.Services.AddScoped<IRegionApplicationService, RegionApplicationService>();
 builder.Services.AddDbContext<SchoolDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetSection("SqlServeConnection").Value));
 

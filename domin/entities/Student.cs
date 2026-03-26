@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration.UserSecrets;
 
 namespace DemoApi.domin.entities;
-
+// ³äÑªÄ£ÐÍ
 public class Student
 {
     public int Id { get; init; }
